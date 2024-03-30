@@ -8,7 +8,7 @@ const port = 3000;
 env.config();
 
 const db = new pg.Client({
-    connectionString: process.env.PG_URL,
+    connectionString: process.env.POSTGRES_URL,
 });
 db.connect();
 
