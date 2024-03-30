@@ -14,10 +14,6 @@ db.connect();
 
 app.use(cors());
 
-app.get("/", (req, res) => {
-    res.json(process.env.SENHA_ADM);
-});
-
 app.get("/dados", async (req, res) => {
     if (req.query.senha === process.env.SENHA_ADM) {
         const result = await db.query(
