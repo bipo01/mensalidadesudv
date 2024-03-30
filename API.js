@@ -11,7 +11,21 @@ const db = new pg.Client({
     connectionString: process.env.PG_URL,
 });
 db.connect();
-
+app.use((req, res, next) => {
+    res.header(
+        "Access-Control-Allow-Origin",
+        "https://mensalidadesudvfront.vercel.app"
+    );
+    res.header(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+    );
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
 app.use(cors());
 
 app.get("/", (req, res) => {
