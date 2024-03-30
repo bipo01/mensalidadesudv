@@ -11,6 +11,7 @@ const db = new pg.Client({
     connectionString: process.env.PG_URL,
 });
 db.connect();
+
 app.use((req, res, next) => {
     res.header(
         "Access-Control-Allow-Origin",
@@ -26,7 +27,6 @@ app.use((req, res, next) => {
     );
     next();
 });
-app.use(cors());
 
 app.get("/", (req, res) => {
     if (req.query.senha === process.env.SENHA_ADM) {
