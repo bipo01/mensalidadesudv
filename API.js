@@ -13,6 +13,21 @@ const db = new pg.Client({
 db.connect();
 
 app.use(cors());
+app.use((req, res, next) => {
+    res.header(
+        "Access-Control-Allow-Origin",
+        "https://mensalidadesudvfront.vercel.app"
+    );
+    res.header(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+    );
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
 
 app.get("/", (req, res) => {
     if (req.query.senha === process.env.SENHA_ADM) {
