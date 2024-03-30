@@ -14,6 +14,14 @@ db.connect();
 
 app.use(cors());
 
+app.get("/", (req, res) => {
+    if (req.query.senha === process.env.SENHA_ADM) {
+        res.json("Correta");
+    } else {
+        res.json("Incorreta");
+    }
+});
+
 app.get("/dados", async (req, res) => {
     if (req.query.senha === process.env.SENHA_ADM) {
         const result = await db.query(
