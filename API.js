@@ -14,7 +14,11 @@ db.connect();
 
 app.use(cors());
 
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
+    res.json(process.env.SENHA_ADM);
+});
+
+app.get("/dados", async (req, res) => {
     if (req.query.senha === process.env.SENHA_ADM) {
         const result = await db.query(
             "SELECT * FROM mensalidadesudv ORDER BY nomesocio DESC"
@@ -22,7 +26,6 @@ app.get("/", async (req, res) => {
         const data = result.rows;
 
         res.json(data);
-        123;
     }
 });
 
