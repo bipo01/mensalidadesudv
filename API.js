@@ -76,8 +76,13 @@ app.get("/filter", async (req, res) => {
 app.get("/novo", async (req, res) => {
     if (req.query.senha === process.env.SENHA_ADM) {
         db.query(
-            "INSERT INTO mensalidadesudv (nomesocio, grau) VALUES ($1, $2)",
-            [req.query.nomesocio, req.query.lugar]
+            "INSERT INTO mensalidadesudv (nomesocio, grau, novoencanto, casauniao) VALUES ($1, $2, $3, $4)",
+            [
+                req.query.nomesocio,
+                req.query.lugar,
+                req.query.novoencanto,
+                req.query.casauniao,
+            ]
         );
 
         res.json("Adicionado");
@@ -132,6 +137,17 @@ app.get("/alternar", (req, res) => {
     if (req.query.senha === process.env.SENHA_ADM) {
         db.query(
             `UPDATE mensalidadesudv SET ${req.query.mes} = $1 WHERE id = $2`,
+            [req.query.condicao, req.query.id]
+        );
+
+        res.json("Alterado");
+    }
+});
+
+app.get("/alternarPag", (req, res) => {
+    if (req.query.senha === process.env.SENHA_ADM) {
+        db.query(
+            `UPDATE mensalidadesudv SET ${req.query.coluna} = $1 WHERE id = $2`,
             [req.query.condicao, req.query.id]
         );
 
